@@ -2,7 +2,7 @@ package Pasarela;
 
 public class Psarela {
 
-	// .......................................... Contadores de cada dirección
+	// .......................................... Contadores de cada direcciï¿½n
 
 	public static int derchaIzquierda = 0;
 	public static int izquierdaDerecha = 0;
@@ -11,7 +11,7 @@ public class Psarela {
 
 	public synchronized void entrar(int direccion) {
 
-		// ........................... ¿Cuál dirección llego?
+		// ........................... ï¿½Cuï¿½l direcciï¿½n llego?
 
 		// .. 0 = Izquierda a Derecha	
 
@@ -19,7 +19,7 @@ public class Psarela {
 
 			System.out.println("Voy a caminar de Izquierda a Derecha");
 
-			// ........................... ¿Puede caminar?
+			// ........................... ï¿½Puede caminar?
 
 			// .. NO 
 
@@ -31,7 +31,7 @@ public class Psarela {
 				catch (InterruptedException e) {}
 			}
 
-			// ..SÍ
+			// ..Sï¿½
 			System.out.println("Caminado de Izquierda a Derecha");
 			izquierdaDerecha++;
 
@@ -43,7 +43,7 @@ public class Psarela {
 
 			System.out.println("Voy a caminar de Derecha a Izquierda");
 
-			// ........................... ¿Puede caminar?
+			// ........................... ï¿½Puede caminar?
 
 			// .. NO 
 
@@ -55,7 +55,7 @@ public class Psarela {
 				catch (InterruptedException e) {}
 			}
 
-			// ..SÍ
+			// ..Sï¿½
 			System.out.println("Caminado de Derecha a Izquierda");
 			derchaIzquierda++;
 
@@ -72,11 +72,21 @@ public class Psarela {
 	}
 
 	public synchronized void salir(int dirrecion) {
+		// Ten en cuenta el sentido. Debido a que estas descontando el valor de la variable sin tener
+		// en cuenta el sentido al mismo tiempo (&& - AND) se te estan quedando usuarios del mismo sentido
+		// en espera cuando deberian pasar. Esto implica que el sentido cambie y empiece a pasar gente del
+		// otro sentido (por el notifyAll()) sin que estrictamente el turno del sentido actual haya finalizado
+
+		// Ejecuta el cÃ³digo con estas modificaciones y con papel y lapiz lleva traza del comportamiento
+		// de la ejecuciÃ³n
 
 		if(dirrecion == 1) {
 			if(--derchaIzquierda == 0) {
 				System.out.println("Libre caminar, no hay Derecha a Izquierda \n -------------");
 				notifyAll();
+			}
+			else {
+				System.out.println("Saliendo de caminar en el sentido Derecha Izquierda");
 			}
 		}
 		else {
@@ -84,8 +94,9 @@ public class Psarela {
 				System.out.println("Libre caminar, no hay Izquierda a Derecha \n -------------");
 				notifyAll();
 			}
+			else {
+				System.out.println("Saliendo de caminar en el sentido Izquierda Derecha");
+			}
 		}
-
 	}
-
 }
