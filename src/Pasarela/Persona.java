@@ -9,8 +9,8 @@ public class Persona extends Thread{
 	
 	// .. Constructor
 	
-	public Persona() {
-		this.direccion = (int)(Math.random()*2);
+	public Persona(int pDireccion) {
+		this.direccion = pDireccion;
 	}
 	
 	// .. RUN
@@ -29,8 +29,8 @@ public class Persona extends Thread{
 		
 		desfile = new Psarela();
 		
-		for (int i = 0; i < 10; i++) 
-			new Persona().start();
+		for (int i = 0; i < 2; i++)
+			new Persona( i % 2 ).start();
 		
 	}
 	

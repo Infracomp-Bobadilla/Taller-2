@@ -72,13 +72,9 @@ public class Psarela {
 	}
 
 	public synchronized void salir(int dirrecion) {
-		// Ten en cuenta el sentido. Debido a que estas descontando el valor de la variable sin tener
-		// en cuenta el sentido al mismo tiempo (&& - AND) se te estan quedando usuarios del mismo sentido
-		// en espera cuando deberian pasar. Esto implica que el sentido cambie y empiece a pasar gente del
-		// otro sentido (por el notifyAll()) sin que estrictamente el turno del sentido actual haya finalizado
-
-		// Ejecuta el código con estas modificaciones y con papel y lapiz lleva traza del comportamiento
-		// de la ejecución
+		// El código está bien. Te habia dejado algunos mensajes al inicio, ignoralos es que
+		// con los mensajes de consola que tienes es un poco confuso para depurar.
+		// Cambie un poco el código para colocar un caso mas sencillo de ver si funciona bien el proceso.
 
 		if(dirrecion == 1) {
 			if(--derchaIzquierda == 0) {
